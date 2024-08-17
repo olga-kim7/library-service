@@ -1,5 +1,3 @@
-from django.shortcuts import render
-from django.views import generic
 from rest_framework import viewsets, permissions
 
 from books_service.models import Book
