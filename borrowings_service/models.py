@@ -10,7 +10,9 @@ class Borrowing(models.Model):
     expected_return_date = models.DateField()
     actual_return_date = models.DateField(null=True, blank=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="borrowings")
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="borrowings")
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="borrowings"
+    )
 
     class Meta:
         verbose_name_plural = "Borrowings"
@@ -44,9 +46,15 @@ class Payment(models.Model):
         PAYMENT = "PAYMENT"
         FINE = "FINE"
 
-    status = models.CharField(max_length=20, choices=StatusChoices.choices, default=StatusChoices.PENDING)
-    type = models.CharField(max_length=20, choices=TypeChoices.choices, default=TypeChoices.PAYMENT)
-    borrowing_id = models.ForeignKey(Borrowing, on_delete=models.CASCADE, related_name="payments")
+    status = models.CharField(
+        max_length=20, choices=StatusChoices.choices, default=StatusChoices.PENDING
+    )
+    type = models.CharField(
+        max_length=20, choices=TypeChoices.choices, default=TypeChoices.PAYMENT
+    )
+    borrowing_id = models.ForeignKey(
+        Borrowing, on_delete=models.CASCADE, related_name="payments"
+    )
     session_url = models.URLField(blank=True, null=True)
     session_id = models.TextField(blank=True, null=True)
 

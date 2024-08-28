@@ -18,7 +18,7 @@ def sample_book(**params) -> Book:
         "author": "Test author",
         "cover": "hard",
         "inventory": 12,
-        "daily_fee": 7
+        "daily_fee": 7,
     }
     defaults.update(params)
     return Book.objects.create(**defaults)
@@ -104,8 +104,7 @@ class AuthorizedAminBookAPITestCase(APITestCase):
             "author": "Test Author",
             "cover": "SOFT",
             "inventory": 12,
-            "daily_fee": 7
-
+            "daily_fee": 7,
         }
         response = self.client.post(BOOK_LIST_URL, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -116,7 +115,7 @@ class AuthorizedAminBookAPITestCase(APITestCase):
             "author": "Test Author2",
             "cover": "HARD",
             "inventory": 102,
-            "daily_fee": 10
+            "daily_fee": 10,
         }
 
         url = get_books_retrieve(self.book.pk)
