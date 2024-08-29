@@ -47,8 +47,7 @@ def send_telegram_borrowed_task(borrowers_list: list):
         for borrower in borrowers_list:
             user_email = borrower["borrower"]
             expiration = borrower["expiration"]
-            message += f"{counter}. {user_email}" \
-                       f" - overdue for {expiration} day/s\n"
+            message += f"{counter}. {user_email}" f" - overdue for {expiration} day/s\n"
             counter += 1
     else:
         message = "No borrowings overdue today!"

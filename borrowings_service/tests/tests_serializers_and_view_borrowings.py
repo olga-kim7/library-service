@@ -42,7 +42,6 @@ def sample_borrowing(user=None, book=None, **params):
     default = {
         "expected_return_date": timezone.now() + datetime.timedelta(days=1),
         "borrow_date": datetime.date.today(),
-
         "book": book,
         "user": user,
     }
@@ -110,8 +109,7 @@ class TestAuthorizedViews(APITestCase):
             type="Payment",
             borrowing_id=self.borrowing,
         )
-        self.borrowing.actual_return_date = (timezone.now() + datetime
-                                             .timedelta(days=1))
+        self.borrowing.actual_return_date = timezone.now() + datetime.timedelta(days=1)
         self.borrowing.save()
         expected_charge = payment.get_money_to_pay
         self.assertEqual(payment.get_money_to_pay, expected_charge)
@@ -134,4 +132,3 @@ class TestAuthorizedViews(APITestCase):
         url = get_borrowing_details(self.borrowing.id)
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-

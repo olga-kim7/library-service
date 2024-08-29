@@ -119,6 +119,7 @@ class BorrowingViewSet(viewsets.ModelViewSet):
 class PaymentViewSet(viewsets.ModelViewSet):
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
 
 
 def get_payment(payment: Payment):

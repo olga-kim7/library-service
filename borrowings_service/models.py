@@ -58,6 +58,9 @@ class Payment(models.Model):
     session_url = models.URLField(blank=True, null=True)
     session_id = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return f"payment: {self.status}, {self.type}, {self.borrowing_id}"
+
     @property
     def get_money_to_pay(self):
         return self.get_charge()
