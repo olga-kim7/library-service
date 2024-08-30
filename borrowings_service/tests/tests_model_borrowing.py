@@ -1,8 +1,7 @@
 import datetime
 
-from django.utils import timezone
-
 from django.test import TestCase
+from django.utils import timezone
 
 from books_service.models import Book
 from borrowings_service.models import Borrowing, Payment

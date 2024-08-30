@@ -1,13 +1,11 @@
 from datetime import timezone
 
-from celery import shared_task, Celery
-from django.contrib.sites import requests
+from celery import Celery, shared_task
 from celery.beat import logger
-
+from django.contrib.sites import requests
 
 from borrowings_service.models import Borrowing
 from config.settings import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
-
 
 app = Celery("telegram_bot", broker="redis://localhost")
 

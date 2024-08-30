@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from datetime import timedelta
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 
@@ -25,8 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-zo4xuj+=yg63of#$1f=&5_&$(a%m=tyyhb5f!&7ypm2d)+ls_^"
-
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -82,6 +83,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 
 DATABASES = {
     "default": {
@@ -166,6 +168,13 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+
+CELERY_BEAT_SCHEDULE = {
+    "my-periodic-task": {
+        "task": "borrowings_service.new_tasks.send_telegram_borrowed_task",
+        "schedule": timedelta(seconds=10),
+    },
+}
 
 
 SIMPLE_JWT = {

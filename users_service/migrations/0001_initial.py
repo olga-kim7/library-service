@@ -2,8 +2,9 @@
 
 import django.contrib.auth.validators
 import django.utils.timezone
-import users_service.models
 from django.db import migrations, models
+
+import users_service.models
 
 
 class Migration(migrations.Migration):

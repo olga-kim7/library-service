@@ -2,21 +2,18 @@ from datetime import timezone
 
 import stripe
 from celery import shared_task
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.db import transaction, IntegrityError
-from django.shortcuts import redirect
-
-from drf_spectacular.utils import extend_schema, OpenApiParameter, OpenApiExample
-from rest_framework import viewsets, permissions, status, generics
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from django.db import IntegrityError, transaction
+from drf_spectacular.utils import (OpenApiExample, OpenApiParameter,
+                                   extend_schema)
+from rest_framework import generics, permissions, status, viewsets
 from rest_framework.response import Response
 
 from books_service.models import Book
 from borrowings_service.models import Borrowing, Payment
-from borrowings_service.serializers import (
-    BorrowingSerializer,
-    BorrowingListSerializer,
-    PaymentSerializer,
-)
+from borrowings_service.serializers import (BorrowingListSerializer,
+                                            BorrowingSerializer,
+                                            PaymentSerializer)
 from config import settings
 from config.settings import YOUR_DOMAIN
 
